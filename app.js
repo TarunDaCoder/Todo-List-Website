@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Mark task as completed on click
         taskText.addEventListener('click', () => {
             taskText.classList.toggle('completed');
-            taskNo.style.color = '#aaa';
+            taskNo.classList.toggle('no-completed');
         });
 
         // Delete task on button click
