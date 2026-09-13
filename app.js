@@ -5,9 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const todoList = document.querySelector('#todo-list');
     const formContainer = document.querySelector('.form-container');
     const listContainer = document.querySelector('.list-container');
+    const addButton = document.querySelector('#add-button')
 
     todoForm.addEventListener('submit', (event) => {
         event.preventDefault();
+        addButton.classList.add('flash');
+        setTimeout(() => {
+          addButton.classList.remove('flash');
+        }, 150);
         // let taskNo = document.querySelectorAll('.todo-item').length + 1;
         addTask(`${todoInput.value}`);
         todoInput.value = '';
