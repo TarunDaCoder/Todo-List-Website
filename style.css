@@ -18,7 +18,7 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    width: 300px;
+    width: 400px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     /* padding: 20px; */
     background-color: #1f2229;
@@ -51,6 +51,7 @@ h1 {
 
 #todo-form {
     display: flex;
+    gap: 8px;
 }
 
 #todo-input {
@@ -64,8 +65,7 @@ h1 {
 }
 
 #add-button {
-    width: 20%;
-    padding: 10px;
+    padding: 8px 14px;
     border: none;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -73,18 +73,21 @@ h1 {
     color: white;
     display: flex;
     cursor: pointer;
+    justify-content: center;
+    align-items: center;
 }
 
 .todo-item {
     display: flex;
     justify-content: space-between;
-    padding: 15px;
+    padding: 10px;
     align-items: center;
     text-align: center;
     margin-bottom: 8px;
     background-color: #1f2229;
     color: white;
-    font-size: 15px;
+    font-size: 17px;
+    font-weight: 500;
     border-radius: 8px;
 }
 
@@ -121,6 +124,16 @@ h1 {
     /* display: flex; */
     cursor: pointer;
     flex-shrink: 0;
+}
+
+#clear-all-btn {
+    padding: 8px 14px;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ff6685;
+    color: white;
+    cursor: pointer;
 }
 
 .task-text {

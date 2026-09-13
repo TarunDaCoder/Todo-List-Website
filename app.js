@@ -31,6 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // Clear all button
+    const clearAllBtn = document.querySelector("#clear-all-btn")
+
+    clearAllBtn.addEventListener('click', () => {
+      todoList.innerHTML = '';
+      updateEmptyState();
+  })
+
     function addTask(task) {
         if (task.trim() === '') return;
 
