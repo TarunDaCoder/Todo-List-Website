@@ -35,8 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearAllBtn = document.querySelector("#clear-all-btn")
 
     clearAllBtn.addEventListener('click', () => {
-      todoList.innerHTML = '';
-      updateEmptyState();
+      clearAllBtn.classList.add('flash');
+      setTimeout(() => {
+        todoList.innerHTML = '';
+        updateEmptyState();
+      }, 150);
   })
 
     function addTask(task) {
@@ -75,9 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Delete task on button click
         deleteButton.addEventListener('click', () => {
-            todoList.removeChild(li);
-            updateEmptyState();
-            renumberTasks();
+            deleteButton.classList.add('flash');
+            setTimeout(() => {
+              todoList.removeChild(li);
+              updateEmptyState();
+              renumberTasks();
+            }, 150);
         });
     }
 });

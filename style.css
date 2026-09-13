@@ -98,9 +98,11 @@ h1 {
     border-radius: 8px;
 }
 
-.todo-item:hover {
+@media (hover: hover) and (pointer: fine) {
+  .todo-item:hover {
     background-color: #363940;
     transition: 0.5s;
+  }
 }
 
 .completed {
@@ -131,6 +133,15 @@ h1 {
     /* display: flex; */
     cursor: pointer;
     flex-shrink: 0;
+}
+
+@keyframes deleteFlash {
+    from { background-color: #ffc1ec; }
+    to { background-color: #ff6685; }
+}
+
+.delete-btn.flash {
+    animation: deleteFlash 0.25s ease;
 }
 
 #clear-all-btn {
