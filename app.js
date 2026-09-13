@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         taskText.textContent = task;
 
         const taskNo = document.createElement('span');
-        listLength = document.querySelectorAll('.todo-item').length + 1;
+        const listLength = document.querySelectorAll('.todo-item').length + 1;
         taskNo.textContent = `${listLength}.`;
 
         const deleteButton = document.createElement('button');
@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         li.appendChild(taskText);
         li.appendChild(deleteButton);
         todoList.appendChild(li);
+        li.scrollIntoView({ behavior: 'smooth', block: 'end' });
 
         taskNo.classList.add('task-no');
         taskText.classList.add('task-text');
