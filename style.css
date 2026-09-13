@@ -25,7 +25,7 @@ body {
     zoom: 1.2;
 }
 
-@media (max-width 480px) {
+@media (max-width: 480px) {
   .container {
     width: 90vw;
     zoom: 1;
