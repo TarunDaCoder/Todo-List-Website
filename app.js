@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Renumber tasks after deletion and addition
-    function renumberTasks(params) {
+    function renumberTasks() {
       document.querySelectorAll('.task-no').forEach((el, index) => {
         el.textContent = `${index + 1}.`;
       });
@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         todoList.innerHTML = '';
         updateEmptyState();
+        clearAllBtn.classList.remove('flash');
       }, 150);
   })
 
@@ -78,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Delete task on button click
         deleteButton.addEventListener('click', () => {
+            deleteButton.disabled = true;
             deleteButton.classList.add('flash');
             setTimeout(() => {
               todoList.removeChild(li);

@@ -136,13 +136,13 @@ h1 {
     flex-shrink: 0;
 }
 
-@keyframes deleteFlash {
+@keyframes flash {
     from { background-color: #ffc1ec; }
     to { background-color: #ff6685; }
 }
 
-.delete-btn.flash {
-    animation: deleteFlash 0.25s ease;
+.flash {
+    animation: flash 0.25s ease;
 }
 
 #clear-all-btn {
