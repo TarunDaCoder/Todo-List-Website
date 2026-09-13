@@ -25,6 +25,13 @@ body {
     zoom: 1.2;
 }
 
+@media (max-width 480px) {
+  .container {
+    width: 90vw;
+    zoom: 1;
+  }
+}
+
 .header-container {
     background-color: #ff6685;
     color: white;
