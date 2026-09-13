@@ -22,6 +22,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     /* padding: 20px; */
     background-color: #1f2229;
+    zoom: 1.2;
 }
 
 .header-container {
@@ -83,6 +84,7 @@ h1 {
     margin-bottom: 8px;
     background-color: #1f2229;
     color: white;
+    font-size: 15px;
     border-radius: 8px;
 }
 
@@ -101,15 +103,16 @@ h1 {
 }
 
 .list-container {
+    max-height: 50vh;
+    overflow-y: auto;
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
     background-color: #1f2229;
 }
 
 .delete-btn {
-    width: 20%;
-    padding: 10px;
-    font-size: 12px;
+    padding: 8px 14px;
+    font-size: 15px;
     border: none;
     border-radius: 4px;
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
@@ -117,6 +120,7 @@ h1 {
     color: white;
     /* display: flex; */
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .task-text {
@@ -124,6 +128,7 @@ h1 {
     justify-content: left;
     display: flex;
     text-align: left;
+    cursor: pointer;
 }
 
 .task-text {

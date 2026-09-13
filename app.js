@@ -13,6 +13,24 @@ document.addEventListener('DOMContentLoaded', () => {
         todoInput.value = '';
     });
 
+    // Renumber tasks after deletion and addition
+    function renumberTasks(params) {
+      document.querySelectorAll('.task-no').forEach((el, index) => {
+        el.textContent = `${index + 1}.`;
+      });
+    }
+
+    // Update padding and border-radius
+    function updateEmptyState() {
+      if (document.querySelectorAll('.todo-item').length == 0) {
+        listContainer.style.padding = 0;
+        formContainer.style.borderRadius = '';
+      } else {
+        formContainer.style.borderRadius = 0;
+        listContainer.style.padding = '20px';
+      }
+    }
+
     function addTask(task) {
         if (task.trim() === '') return;
 
@@ -38,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
         taskNo.classList.add('task-no');
         taskText.classList.add('task-text');
 
+        updateEmptyState();
+
         // Mark task as completed on click
         taskText.addEventListener('click', () => {
             taskText.classList.toggle('completed');
@@ -47,12 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Delete task on button click
         deleteButton.addEventListener('click', () => {
             todoList.removeChild(li);
+            updateEmptyState();
+            renumberTasks();
         });
-    }
-    if (document.querySelectorAll('.todo-item').length == 0) {
-        listContainer.style.padding = 0;
-    } else {
-        formContainer.style.borderRadius = 0;
-        listContainer.style.padding = '20px';
     }
 });
