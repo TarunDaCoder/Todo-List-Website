@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (text.trim() === '') return;
         tasks.push({ id: nextId++, text: text.trim(), completed: false });
         render();
+        saveTasks();
         todoList.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
 
@@ -33,6 +34,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const task = tasks.find(t => t.id === id);
         if (task) task.completed = !task.completed;
         render();
+        saveTasks();
+    }
+    
+    function saveTasks() {
+      localStorage.setItem('todos', JSON.stringify(tasks));
+    }
+
+    function loadTasks() {
+      const saved = JSON.parse(localStorage.getItem('todos') || '[]');
+      tasks = saved;
+      nextId = tasks.length ? Math.max(...tasks.map(t => t.id)) + 1 : 1;
+      render();
     }
 
     // ---- Rendering ----
@@ -94,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             tasks = [];
             render();
+            saveTasks();
             clearAllBtn.classList.remove('flash');
         }, 150);
     });
@@ -110,5 +124,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    render();
+    loadTasks();
 });
