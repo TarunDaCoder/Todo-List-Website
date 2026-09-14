@@ -5,92 +5,110 @@ document.addEventListener('DOMContentLoaded', () => {
     const todoList = document.querySelector('#todo-list');
     const formContainer = document.querySelector('.form-container');
     const listContainer = document.querySelector('.list-container');
-    const addButton = document.querySelector('#add-button')
+    const addButton = document.querySelector('#add-button');
+    const clearAllBtn = document.querySelector('#clear-all-btn');
 
-    todoForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        addButton.classList.add('flash');
+    // ---- State ----
+    let tasks = [];
+    let nextId = 1;
+
+    // ---- State-changing actions ----
+    function addTask(text) {
+        if (text.trim() === '') return;
+        tasks.push({ id: nextId++, text: text.trim(), completed: false });
+        render();
+        todoList.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+
+    function deleteTask(id, buttonEl) {
+        buttonEl.disabled = true;
+        buttonEl.classList.add('flash');
         setTimeout(() => {
-          addButton.classList.remove('flash');
+            tasks = tasks.filter(task => task.id !== id);
+            render();
         }, 150);
-        // let taskNo = document.querySelectorAll('.todo-item').length + 1;
-        addTask(`${todoInput.value}`);
-        todoInput.value = '';
-    });
+    }
 
-    // Renumber tasks after deletion and addition
-    function renumberTasks() {
-      document.querySelectorAll('.task-no').forEach((el, index) => {
-        el.textContent = `${index + 1}.`;
-      });
+    function toggleTask(id) {
+        const task = tasks.find(t => t.id === id);
+        if (task) task.completed = !task.completed;
+        render();
+    }
+
+    // ---- Rendering ----
+    function render() {
+        todoList.innerHTML = '';
+
+        tasks.forEach((task, index) => {
+            const li = document.createElement('li');
+            li.classList.add('todo-item');
+            li.dataset.id = task.id;
+
+            const taskNo = document.createElement('span');
+            taskNo.classList.add('task-no');
+            taskNo.textContent = `${index + 1}.`;
+            if (task.completed) taskNo.classList.add('no-completed');
+
+            const taskText = document.createElement('span');
+            taskText.classList.add('task-text');
+            taskText.textContent = task.text;
+            if (task.completed) taskText.classList.add('completed');
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('delete-btn');
+
+            li.appendChild(taskNo);
+            li.appendChild(taskText);
+            li.appendChild(deleteButton);
+            todoList.appendChild(li);
+        });
+
+        updateEmptyState();
     }
 
     // Update padding and border-radius
     function updateEmptyState() {
-      if (document.querySelectorAll('.todo-item').length == 0) {
-        listContainer.style.padding = 0;
-        formContainer.style.borderRadius = '';
-      } else {
-        formContainer.style.borderRadius = 0;
-        listContainer.style.padding = '20px';
-      }
+        if (tasks.length === 0) {
+            listContainer.style.padding = 0;
+            formContainer.style.borderRadius = '';
+        } else {
+            formContainer.style.borderRadius = 0;
+            listContainer.style.padding = '20px';
+        }
     }
 
-    // Clear all button
-    const clearAllBtn = document.querySelector("#clear-all-btn")
+    // ---- Events ----
+    todoForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        addButton.classList.add('flash');
+        setTimeout(() => {
+            addButton.classList.remove('flash');
+        }, 150);
+        addTask(todoInput.value);
+        todoInput.value = '';
+    });
 
     clearAllBtn.addEventListener('click', () => {
-      clearAllBtn.classList.add('flash');
-      setTimeout(() => {
-        todoList.innerHTML = '';
-        updateEmptyState();
-        clearAllBtn.classList.remove('flash');
-      }, 150);
-  })
+        clearAllBtn.classList.add('flash');
+        setTimeout(() => {
+            tasks = [];
+            render();
+            clearAllBtn.classList.remove('flash');
+        }, 150);
+    });
 
-    function addTask(task) {
-        if (task.trim() === '') return;
+    todoList.addEventListener('click', (event) => {
+        const li = event.target.closest('.todo-item');
+        if (!li) return;
+        const id = Number(li.dataset.id);
 
-        const li = document.createElement('li');
-        li.classList.add('todo-item');
+        if (event.target.classList.contains('delete-btn')) {
+            deleteTask(id, event.target);
+        } else if (event.target.classList.contains('task-text')) {
+            toggleTask(id);
+        }
+    });
 
-        const taskText = document.createElement('span');
-        taskText.textContent = task;
-
-        const taskNo = document.createElement('span');
-        const listLength = document.querySelectorAll('.todo-item').length + 1;
-        taskNo.textContent = `${listLength}.`;
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.classList.add('delete-btn');
-
-        li.appendChild(taskNo);
-        li.appendChild(taskText);
-        li.appendChild(deleteButton);
-        todoList.appendChild(li);
-        li.scrollIntoView({ behavior: 'smooth', block: 'end' });
-
-        taskNo.classList.add('task-no');
-        taskText.classList.add('task-text');
-
-        updateEmptyState();
-
-        // Mark task as completed on click
-        taskText.addEventListener('click', () => {
-            taskText.classList.toggle('completed');
-            taskNo.classList.toggle('no-completed');
-        });
-
-        // Delete task on button click
-        deleteButton.addEventListener('click', () => {
-            deleteButton.disabled = true;
-            deleteButton.classList.add('flash');
-            setTimeout(() => {
-              todoList.removeChild(li);
-              updateEmptyState();
-              renumberTasks();
-            }, 150);
-        });
-    }
+    render();
 });
