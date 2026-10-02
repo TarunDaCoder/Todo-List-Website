@@ -1,200 +1,210 @@
 :root {
-    --crust: #181926;
-    --mantle: #1e2030;
-    --base: #24273a;
-    --surface0: #363a4f;
-    --surface1: #494d64;
-    --text: #cad3f5;
-    --subtext0: #a5adcb;
-    --mauve: #c6a0f6;
-    --mauve-hover: #ad81f2;
-    --red: #ed8796;
+  --crust: #181926;
+  --mantle: #1e2030;
+  --base: #24273a;
+  --surface0: #363a4f;
+  --surface1: #494d64;
+  --text: #cad3f5;
+  --subtext0: #a5adcb;
+  --mauve: #c6a0f6;
+  --mauve-hover: #ad81f2;
+  --red: #ed8796;
 }
 
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    background: var(--crust);
-    font-family: 'Arial', sans-serif;
-    padding: 60px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: var(--crust);
+  font-family: 'Arial', sans-serif;
+  padding: 60px 16px;
 }
 
 .container {
-    width: 400px;
-    max-width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    background-color: var(--base);
-    overflow: hidden;
+  width: 400px;
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  background-color: var(--base);
+  overflow: hidden;
 }
 
 @media (max-width: 480px) {
-    .container {
-        width: 90vw;
-    }
+  .container {
+    width: 90vw;
+  }
 }
 
 .header-container {
-    background-color: var(--mantle);
-    color: var(--mauve);
-    display: flex;
-    justify-content: center;
+  background-color: var(--mantle);
+  color: var(--mauve);
+  display: flex;
+  justify-content: center;
 }
 
 h1 {
-    padding: 14px;
-    font-size: 1.2rem;
+  padding: 14px;
+  font-size: 1.2rem;
 }
 
 .form-container {
-    padding: 20px;
-    background-color: var(--base);
+  padding: 20px;
+  background-color: var(--base);
 }
 
 #todo-form {
-    display: flex;
-    gap: 8px;
+  display: flex;
+  gap: 8px;
 }
 
 #todo-input {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: var(--surface0);
-    color: var(--text);
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--surface0);
+  color: var(--text);
 }
 
 #todo-input::placeholder {
-    color: var(--subtext0);
+  color: var(--subtext0);
 }
 
 #add-button,
 #clear-all-btn {
-    padding: 8px 14px;
-    border: none;
-    border-radius: 4px;
-    background-color: var(--mauve);
-    color: var(--crust);
-    font-weight: 600;
-    cursor: pointer;
-    flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--mauve);
+  color: var(--crust);
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
 }
 
 #add-button {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 #add-button:hover,
 #clear-all-btn:hover {
-    background-color: var(--mauve-hover);
+  background-color: var(--mauve-hover);
 }
 
 @keyframes flash {
-    from { background-color: var(--text); }
-    to { background-color: var(--mauve); }
+  from {
+    background-color: var(--text);
+  }
+
+  to {
+    background-color: var(--mauve);
+  }
 }
 
 @keyframes flashDanger {
-    from { background-color: var(--text); }
-    to { background-color: var(--red); }
+  from {
+    background-color: var(--text);
+  }
+
+  to {
+    background-color: var(--red);
+  }
 }
 
 #add-button.flash,
 #clear-all-btn.flash {
-    animation: flash 0.2s ease;
+  animation: flash 0.2s ease;
 }
 
 .delete-btn.flash {
-    animation: flashDanger 0.2s ease;
+  animation: flashDanger 0.2s ease;
 }
 
 .list-container {
-    max-height: 50vh;
-    overflow-y: auto;
-    background-color: var(--base);
-    padding: 0;
-    transition: padding 0.15s ease;
+  max-height: 50vh;
+  overflow-y: auto;
+  background-color: var(--base);
+  padding: 0;
+  transition: padding 0.15s ease;
 }
 
 .list-container.has-items {
-    padding: 0 20px 20px;
+  padding: 0 20px 20px;
 }
 
 ul#todo-list {
-    list-style: none;
+  list-style: none;
 }
 
 .todo-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    margin-bottom: 8px;
-    background-color: var(--surface0);
-    color: var(--text);
-    border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 8px;
+  background-color: var(--surface0);
+  color: var(--text);
+  border-radius: 8px;
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .todo-item:hover {
-        background-color: var(--surface1);
-        transition: background-color 0.5s;
-    }
+  .todo-item:hover {
+    background-color: var(--surface1);
+    transition: background-color 0.5s;
+  }
 }
 
 .task-no {
-    color: var(--subtext0);
-    margin-right: 10px;
+  color: var(--subtext0);
+  margin-right: 10px;
 }
 
 .task-no.no-completed {
-    color: #6e738d;
+  color: #6e738d;
 }
 
 .task-text {
-    flex: 1;
-    text-align: left;
-    cursor: pointer;
-    font-weight: 500;
+  flex: 1;
+  text-align: left;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 .task-text.completed {
-    text-decoration: line-through;
-    color: var(--subtext0);
+  text-decoration: line-through;
+  color: var(--subtext0);
 }
 
 .delete-btn {
-    padding: 8px 14px;
-    font-size: 12px;
-    border: none;
-    border-radius: 4px;
-    background-color: var(--red);
-    color: var(--crust);
-    font-weight: 600;
-    cursor: pointer;
-    flex-shrink: 0;
+  padding: 8px 14px;
+  font-size: 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--red);
+  color: var(--crust);
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .delete-btn:active {
-    background-color: var(--text);
-    transition: background-color 0.15s ease;
+  background-color: var(--text);
+  transition: background-color 0.15s ease;
 }
 
 .delete-btn:disabled {
-    opacity: 0.6;
-    cursor: default;
+  opacity: 0.6;
+  cursor: default;
 }
